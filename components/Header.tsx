@@ -4,7 +4,6 @@ import Link from "next/link";
 import { useState } from "react";
 import { nav, site } from "@/lib/site";
 import Container from "./Container";
-import Button from "./Button";
 
 // グローバルヘッダー。モバイルではハンバーガーメニューに切り替え。
 export default function Header() {
@@ -29,9 +28,6 @@ export default function Header() {
                 {item.label}
               </Link>
             ))}
-            <Button href={site.appUrl} external variant="ghost">
-              ログイン
-            </Button>
           </nav>
 
           {/* モバイル トグル */}
@@ -61,14 +57,6 @@ export default function Header() {
                 {item.label}
               </Link>
             ))}
-            <a
-              href={site.appUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="rounded-sm px-sm py-sm text-sm font-medium text-primary hover:bg-surface-alt"
-            >
-              ログイン
-            </a>
           </nav>
         )}
       </Container>

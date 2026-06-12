@@ -3,13 +3,12 @@
 export const site = {
   name: "株式会社Fochi",
   nameEn: "Fochi, Inc.",
-  tagline: "駐車場経営を、もっとシンプルに。",
+  // h1 / ヒーローのキャッチコピー（テック企業らしい汎用文言。後で差し替え可）。
+  tagline: "ソフトウェアで、現場の「不便」をなくす。",
   description:
-    "株式会社Fochiは、月極駐車場管理SaaSをはじめとする不動産テック事業を通じて、駐車場経営の効率化を支援します。",
+    "株式会社Fochiは、日常に潜む「不便」をテクノロジーで解決するプロダクトカンパニーです。プロダクト開発とDX支援を通じて、現場が本当に使える仕組みをつくります。",
   domain: "fochi.co.jp",
   url: "https://fochi.co.jp",
-  // プロダクト（monthly_parking）の本番URL
-  appUrl: "https://app.fochi.co.jp",
   email: "info@fochi.co.jp",
   locale: "ja_JP",
 } as const;
@@ -24,12 +23,50 @@ export const company = {
     postalCode: "〒000-0000", // PLACEHOLDER
     line: "東京都＿＿区＿＿＿＿", // PLACEHOLDER
   },
-  business: [
-    "月極駐車場管理SaaSの開発・運営",
-    "不動産管理業務のDX支援",
-    "Webサービスの企画・開発",
-  ],
+  mission:
+    "わたしたちは、テクノロジーの力で日々の業務やくらしに潜む「不便」を一つずつ解きほぐし、誰もが心地よく使える仕組みを社会に実装します。",
 } as const;
+
+// 提供サービス（トップのサマリー・事業内容ページで使用）。
+// 月極駐車場管理は数あるサービスの一つとして扱う。
+export const services = [
+  {
+    slug: "parking",
+    name: "月極駐車場管理SaaS",
+    tagline: "駐車場の申込・契約・管理を、まるごとオンラインに。",
+    summary:
+      "電話とFAXに頼っていた月極駐車場の運用を、Webだけで完結できる管理SaaS。",
+    points: [
+      "空き区画の公開と入居申込のオンライン受付",
+      "契約手続きのデジタル化",
+      "契約・テナント情報の一元管理",
+    ],
+  },
+  {
+    slug: "development",
+    name: "プロダクト・受託開発",
+    tagline: "アイデアを、動くプロダクトに。",
+    summary:
+      "Web・モバイルアプリの企画・設計から開発・運用までを一気通貫で支援します。",
+    points: [
+      "要件定義・UI / UX 設計",
+      "Web アプリ／モバイルアプリ開発",
+      "リリース後の運用・改善",
+    ],
+  },
+  {
+    slug: "dx",
+    name: "DX・業務改善支援",
+    tagline: "現場の「不便」を、仕組みで解く。",
+    summary:
+      "紙・電話中心の業務をデジタル化し、現場に定着するまで伴走支援します。",
+    points: [
+      "業務フローの可視化・課題整理",
+      "ツール選定・内製化支援",
+      "データ活用・自動化",
+    ],
+  },
+] as const;
 
 // グローバルナビゲーション
 export const nav = [

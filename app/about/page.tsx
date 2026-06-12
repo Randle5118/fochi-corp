@@ -1,5 +1,5 @@
 import Section from "@/components/Section";
-import { company, site } from "@/lib/site";
+import { company, services, site } from "@/lib/site";
 import { getMetadata } from "@/lib/seo";
 
 export const metadata = getMetadata({
@@ -18,27 +18,42 @@ const rows: { label: string; value: string }[] = [
     label: "所在地",
     value: `${company.address.postalCode} ${company.address.line}`,
   },
-  { label: "事業内容", value: company.business.join("、") },
+  { label: "事業内容", value: services.map((s) => s.name).join("、") },
 ];
 
 export default function AboutPage() {
   return (
-    <Section title="会社概要" lead={site.tagline}>
-      <dl className="overflow-hidden rounded-md border border-border bg-surface">
-        {rows.map((row, i) => (
-          <div
-            key={row.label}
-            className={`grid grid-cols-1 sm:grid-cols-[160px_1fr] ${
-              i !== rows.length - 1 ? "border-b border-border" : ""
-            }`}
-          >
-            <dt className="bg-surface-alt px-lg py-md text-sm font-medium text-ink-muted">
-              {row.label}
-            </dt>
-            <dd className="px-lg py-md text-base text-ink">{row.value}</dd>
-          </div>
-        ))}
-      </dl>
-    </Section>
+    <>
+      {/* ミッション */}
+      <Section title="会社概要" lead={site.tagline}>
+        <div className="rounded-lg border border-border bg-surface p-lg md:p-xl">
+          <p className="text-2xs font-medium uppercase tracking-wider text-primary">
+            Mission
+          </p>
+          <p className="mt-sm text-lg leading-relaxed text-ink">
+            {company.mission}
+          </p>
+        </div>
+      </Section>
+
+      {/* 会社情報テーブル */}
+      <Section alt className="!pt-0 md:!pt-0">
+        <dl className="overflow-hidden rounded-md border border-border bg-surface">
+          {rows.map((row, i) => (
+            <div
+              key={row.label}
+              className={`grid grid-cols-1 sm:grid-cols-[160px_1fr] ${
+                i !== rows.length - 1 ? "border-b border-border" : ""
+              }`}
+            >
+              <dt className="bg-surface-alt px-lg py-md text-sm font-medium text-ink-muted">
+                {row.label}
+              </dt>
+              <dd className="px-lg py-md text-base text-ink">{row.value}</dd>
+            </div>
+          ))}
+        </dl>
+      </Section>
+    </>
   );
 }

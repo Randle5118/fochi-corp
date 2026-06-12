@@ -3,7 +3,7 @@ import Hero from "@/components/Hero";
 import Section from "@/components/Section";
 import Button from "@/components/Button";
 import { newsRepo, NEWS_CATEGORY_LABEL } from "@/lib/content";
-import { company, site } from "@/lib/site";
+import { services } from "@/lib/site";
 import { getMetadata } from "@/lib/seo";
 
 export const metadata = getMetadata({ path: "/" });
@@ -19,21 +19,22 @@ export default async function HomePage() {
       <Section
         alt
         title="事業内容"
-        lead="不動産テックで、駐車場経営の現場をアップデートします。"
+        lead="ソフトウェアで、現場の課題を解決します。"
       >
         <div className="grid gap-md md:grid-cols-3">
-          {company.business.map((b) => (
+          {services.map((s) => (
             <div
-              key={b}
-              className="rounded-md border border-border bg-surface p-lg"
+              key={s.slug}
+              className="flex flex-col rounded-md border border-border bg-surface p-lg"
             >
-              <p className="text-base font-medium text-ink">{b}</p>
+              <h3 className="text-lg">{s.name}</h3>
+              <p className="mt-sm text-sm text-ink-muted">{s.summary}</p>
             </div>
           ))}
         </div>
         <div className="mt-xl">
           <Button href="/services" variant="ghost">
-            詳しく見る
+            事業内容を詳しく見る
           </Button>
         </div>
       </Section>
@@ -73,16 +74,13 @@ export default async function HomePage() {
       <Section alt>
         <div className="rounded-lg border border-border bg-surface p-xl text-center md:p-2xl">
           <h2 className="text-2xl tracking-tight">
-            駐車場管理のご相談はお気軽に
+            ご相談・お問い合わせはお気軽に
           </h2>
           <p className="mx-auto mt-sm max-w-xl text-ink-muted">
-            プロダクトのデモ、業務提携、その他お問い合わせを承っております。
+            サービスに関するご相談、業務提携、取材などを承っております。
           </p>
-          <div className="mt-lg flex flex-wrap justify-center gap-sm">
+          <div className="mt-lg flex justify-center">
             <Button href="/contact">お問い合わせ</Button>
-            <Button href={site.appUrl} external variant="ghost">
-              プロダクトを見る
-            </Button>
           </div>
         </div>
       </Section>
