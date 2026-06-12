@@ -22,7 +22,7 @@
 |---|---|---|
 | 性質 | ログイン後に操作する Web アプリ / ダッシュボード | 公開・SEO 重視のマーケティングサイト |
 | 主なレンダリング | SSR / Client（認証・即時データ） | **SSG / ISR**（内容変動が少なく、高速・被クロール重視） |
-| ドメイン | `app.fochi.co.jp` | `fochi.co.jp` |
+| ドメイン | （プロダクト側ドメイン） | `fochi.jp`（dev: `fochi.vercel.app`） |
 | リポジトリ | 別リポジトリ | 別リポジトリ（本リポジトリ） |
 
 **ルール:** 2 つのサービスは意図的に分離している。共有が必要なものは
@@ -134,7 +134,7 @@ Supabase は既存資産だが、編集UIを自前で作る必要があり「非
 
 ## 8. デプロイ / 環境変数
 
-- Vercel に独立 project として配置。本番ドメイン `fochi.co.jp`。
+- Vercel に独立 project として配置。本番ドメイン `fochi.jp`（dev/preview は `fochi.vercel.app`）。production ブランチは `main`。
 - 必要な環境変数は `.env.example` 参照（`RESEND_API_KEY` ほか）。
 - `sitemap.xml` / `robots.txt` は `app/sitemap.ts` / `app/robots.ts` で生成（next-sitemap は使わない）。
 

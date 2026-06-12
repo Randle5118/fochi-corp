@@ -7,9 +7,9 @@ export const site = {
   tagline: "ソフトウェアで、現場の「不便」をなくす。",
   description:
     "株式会社Fochiは、日常に潜む「不便」をテクノロジーで解決するプロダクトカンパニーです。プロダクト開発とDX支援を通じて、現場が本当に使える仕組みをつくります。",
-  domain: "fochi.co.jp",
-  url: "https://fochi.co.jp",
-  email: "info@fochi.co.jp",
+  domain: "fochi.jp",
+  url: "https://fochi.jp",
+  email: "info@fochi.jp",
   locale: "ja_JP",
 } as const;
 

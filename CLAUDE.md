@@ -90,5 +90,5 @@ npm run lint && npm run build
 ---
 
 ## デプロイ
-Vercel 独立 project / `fochi.co.jp`。環境変数は `.env.example` 参照（`RESEND_API_KEY` ほか）。
+Vercel 独立 project。本番 `fochi.jp`（production ブランチ `main`）/ dev `fochi.vercel.app`（`dev` ブランチ）。環境変数は `.env.example` 参照（`RESEND_API_KEY` ほか）。
 `lib/site.ts` の `PLACEHOLDER`（代表者・住所・資本金など）は公開前に登記情報へ差し替えること。

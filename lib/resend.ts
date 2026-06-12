@@ -14,8 +14,8 @@ export async function sendContactEmail({
   replyTo?: string;
 }) {
   const apiKey = process.env.RESEND_API_KEY;
-  const from = process.env.CONTACT_FROM_EMAIL ?? "Fochi <noreply@fochi.co.jp>";
-  const to = process.env.CONTACT_TO_EMAIL ?? "info@fochi.co.jp";
+  const from = process.env.CONTACT_FROM_EMAIL ?? "Fochi <noreply@fochi.jp>";
+  const to = process.env.CONTACT_TO_EMAIL ?? "info@fochi.jp";
 
   if (!apiKey) {
     throw new Error("RESEND_API_KEY is not set");

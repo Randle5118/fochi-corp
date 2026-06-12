@@ -6,7 +6,7 @@
 - **Styling:** Tailwind CSS（デザイントークンは `monthly_parking/DESIGN.md` から移植）
 - **Content:** Markdown 本文 + フロントマター（`content/news/*.mdx`）。将来 headless CMS へ無痛移行できる設計。
 - **Contact:** Resend（Server Action 経由）
-- **Deploy:** Vercel（`fochi.co.jp`）
+- **Deploy:** Vercel（本番 `fochi.jp` / dev `fochi.vercel.app`）
 
 ## セットアップ
 
