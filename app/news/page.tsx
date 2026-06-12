@@ -13,7 +13,7 @@ export default async function NewsListPage() {
   const news = await newsRepo.list();
 
   return (
-    <Section title="お知らせ">
+    <Section eyebrow="News" title="お知らせ">
       {news.length === 0 ? (
         <p className="text-ink-muted">現在、お知らせはありません。</p>
       ) : (

@@ -1,5 +1,5 @@
 import Section from "@/components/Section";
-import Button from "@/components/Button";
+import CtaBand from "@/components/CtaBand";
 import { services } from "@/lib/site";
 import { getMetadata } from "@/lib/seo";
 
@@ -14,6 +14,7 @@ export default function ServicesPage() {
   return (
     <>
       <Section
+        eyebrow="Services"
         title="事業内容"
         lead="ソフトウェアで、現場の「不便」を解決します。"
       >
@@ -25,15 +26,18 @@ export default function ServicesPage() {
 
       <Section alt className="!pt-0 md:!pt-0">
         <div className="space-y-md">
-          {services.map((s) => (
+          {services.map((s, i) => (
             <div
               key={s.slug}
               id={s.slug}
-              className="scroll-mt-20 rounded-lg border border-border bg-surface p-lg md:p-xl"
+              className="scroll-mt-20 rounded-lg border border-border bg-surface p-lg transition-colors hover:border-primary md:p-xl"
             >
               <div className="grid gap-md md:grid-cols-[1fr_1.2fr] md:gap-xl">
                 <div>
-                  <h2 className="text-xl tracking-tight md:text-2xl">
+                  <span className="text-sm font-medium tabular-nums text-primary">
+                    {String(i + 1).padStart(2, "0")}
+                  </span>
+                  <h2 className="mt-xs text-xl tracking-tight md:text-2xl">
                     {s.name}
                   </h2>
                   <p className="mt-sm text-primary">{s.tagline}</p>
@@ -59,19 +63,10 @@ export default function ServicesPage() {
         </div>
       </Section>
 
-      <Section>
-        <div className="rounded-lg border border-border bg-surface p-xl text-center md:p-2xl">
-          <h2 className="text-2xl tracking-tight">
-            サービスに関するご相談はこちら
-          </h2>
-          <p className="mx-auto mt-sm max-w-xl text-ink-muted">
-            導入のご相談・お見積り・業務提携など、お気軽にお問い合わせください。
-          </p>
-          <div className="mt-lg flex justify-center">
-            <Button href="/contact">お問い合わせ</Button>
-          </div>
-        </div>
-      </Section>
+      <CtaBand
+        title="サービスに関するご相談はこちら"
+        body="導入のご相談・お見積り・業務提携など、お気軽にお問い合わせください。"
+      />
     </>
   );
 }

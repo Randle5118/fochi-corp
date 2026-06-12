@@ -1,13 +1,14 @@
 import Link from "next/link";
 import { ReactNode } from "react";
 
-type Variant = "primary" | "ghost";
+type Variant = "primary" | "ghost" | "white";
 
 const styles: Record<Variant, string> = {
   primary:
     "bg-primary text-white hover:bg-primary-hover border border-transparent",
   ghost:
     "bg-transparent text-primary border border-border hover:bg-primary-light",
+  white: "bg-white text-primary hover:bg-primary-light border border-transparent",
 };
 
 // リンクボタン（CTA・ナビゲーション用）。内部リンク／外部リンクの両対応。

@@ -1,5 +1,5 @@
 import Section from "@/components/Section";
-import { company, services, site } from "@/lib/site";
+import { company, services, strengths, site } from "@/lib/site";
 import { getMetadata } from "@/lib/seo";
 
 export const metadata = getMetadata({
@@ -25,19 +25,34 @@ export default function AboutPage() {
   return (
     <>
       {/* ミッション */}
-      <Section title="会社概要" lead={site.tagline}>
+      <Section eyebrow="Mission" title="会社概要" lead={site.tagline}>
         <div className="rounded-lg border border-border bg-surface p-lg md:p-xl">
-          <p className="text-2xs font-medium uppercase tracking-wider text-primary">
-            Mission
-          </p>
-          <p className="mt-sm text-lg leading-relaxed text-ink">
+          <p className="text-xl leading-relaxed text-ink md:text-2xl">
             {company.mission}
           </p>
         </div>
       </Section>
 
+      {/* 価値観 */}
+      <Section alt eyebrow="Values" title="わたしたちが大切にすること">
+        <div className="grid gap-md md:grid-cols-3">
+          {strengths.map((s, i) => (
+            <div
+              key={s.title}
+              className="rounded-md border border-border bg-surface p-lg"
+            >
+              <span className="text-sm font-medium tabular-nums text-primary">
+                {String(i + 1).padStart(2, "0")}
+              </span>
+              <h3 className="mt-sm text-lg">{s.title}</h3>
+              <p className="mt-xs text-sm text-ink-muted">{s.body}</p>
+            </div>
+          ))}
+        </div>
+      </Section>
+
       {/* 会社情報テーブル */}
-      <Section alt className="!pt-0 md:!pt-0">
+      <Section eyebrow="Company" title="会社情報">
         <dl className="overflow-hidden rounded-md border border-border bg-surface">
           {rows.map((row, i) => (
             <div

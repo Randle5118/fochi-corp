@@ -13,6 +13,7 @@ export const metadata = getMetadata({
 export default function ContactPage() {
   return (
     <Section
+      eyebrow="Contact"
       title="お問い合わせ"
       lead="プロダクトのデモ・業務提携・その他ご相談を承っております。"
     >

@@ -18,6 +18,12 @@ export default function Footer() {
           <div>
             <div className="text-lg font-bold text-ink">{site.name}</div>
             <p className="mt-sm text-sm text-ink-muted">{site.tagline}</p>
+            <a
+              href={`mailto:${site.email}`}
+              className="mt-md inline-block text-sm text-ink-muted transition-colors hover:text-ink"
+            >
+              {site.email}
+            </a>
           </div>
 
           <div>
