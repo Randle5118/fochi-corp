@@ -1,5 +1,6 @@
 import Section from "@/components/Section";
 import ContactForm from "./ContactForm";
+import { IconTile } from "@/components/icons";
 import { site } from "@/lib/site";
 import { getMetadata } from "@/lib/seo";
 
@@ -22,7 +23,10 @@ export default function ContactPage() {
           <ContactForm />
         </div>
         <aside className="rounded-md border border-border bg-surface-alt p-lg">
-          <h2 className="text-base font-medium text-ink">メールでのご連絡</h2>
+          <IconTile name="mail" />
+          <h2 className="mt-md text-base font-medium text-ink">
+            メールでのご連絡
+          </h2>
           <p className="mt-sm text-sm text-ink-muted">
             フォームをご利用いただけない場合は、下記までご連絡ください。
           </p>

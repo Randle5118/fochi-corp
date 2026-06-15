@@ -13,7 +13,13 @@ export default function Header() {
     <header className="sticky top-0 z-50 border-b border-border bg-surface/90 backdrop-blur">
       <Container>
         <div className="flex h-16 items-center justify-between">
-          <Link href="/" className="text-xl font-bold tracking-tight text-ink">
+          <Link
+            href="/"
+            className="flex items-center gap-sm text-xl font-bold tracking-tight text-ink"
+          >
+            <span className="flex h-8 w-8 items-center justify-center rounded-md bg-primary text-base font-bold text-white">
+              F
+            </span>
             {site.name}
           </Link>
 

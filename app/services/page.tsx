@@ -1,5 +1,6 @@
 import Section from "@/components/Section";
 import CtaBand from "@/components/CtaBand";
+import { IconTile } from "@/components/icons";
 import { services } from "@/lib/site";
 import { getMetadata } from "@/lib/seo";
 
@@ -34,10 +35,13 @@ export default function ServicesPage() {
             >
               <div className="grid gap-md md:grid-cols-[1fr_1.2fr] md:gap-xl">
                 <div>
-                  <span className="text-sm font-medium tabular-nums text-primary">
-                    {String(i + 1).padStart(2, "0")}
-                  </span>
-                  <h2 className="mt-xs text-xl tracking-tight md:text-2xl">
+                  <div className="flex items-center gap-md">
+                    <IconTile name={s.icon} />
+                    <span className="text-sm font-medium tabular-nums text-ink-muted">
+                      {String(i + 1).padStart(2, "0")}
+                    </span>
+                  </div>
+                  <h2 className="mt-md text-xl tracking-tight md:text-2xl">
                     {s.name}
                   </h2>
                   <p className="mt-sm text-primary">{s.tagline}</p>

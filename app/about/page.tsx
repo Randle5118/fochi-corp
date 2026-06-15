@@ -1,4 +1,5 @@
 import Section from "@/components/Section";
+import { IconTile } from "@/components/icons";
 import { company, services, strengths, site } from "@/lib/site";
 import { getMetadata } from "@/lib/seo";
 
@@ -36,15 +37,13 @@ export default function AboutPage() {
       {/* 価値観 */}
       <Section alt eyebrow="Values" title="わたしたちが大切にすること">
         <div className="grid gap-md md:grid-cols-3">
-          {strengths.map((s, i) => (
+          {strengths.map((s) => (
             <div
               key={s.title}
               className="rounded-md border border-border bg-surface p-lg"
             >
-              <span className="text-sm font-medium tabular-nums text-primary">
-                {String(i + 1).padStart(2, "0")}
-              </span>
-              <h3 className="mt-sm text-lg">{s.title}</h3>
+              <IconTile name={s.icon} />
+              <h3 className="mt-md text-lg">{s.title}</h3>
               <p className="mt-xs text-sm text-ink-muted">{s.body}</p>
             </div>
           ))}

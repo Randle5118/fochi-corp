@@ -32,6 +32,7 @@ export const company = {
 export const services = [
   {
     slug: "parking",
+    icon: "car",
     name: "月極駐車場管理SaaS",
     tagline: "駐車場の申込・契約・管理を、まるごとオンラインに。",
     summary:
@@ -44,6 +45,7 @@ export const services = [
   },
   {
     slug: "development",
+    icon: "code",
     name: "プロダクト・受託開発",
     tagline: "アイデアを、動くプロダクトに。",
     summary:
@@ -56,6 +58,7 @@ export const services = [
   },
   {
     slug: "dx",
+    icon: "refresh",
     name: "DX・業務改善支援",
     tagline: "現場の「不便」を、仕組みで解く。",
     summary:
@@ -71,14 +74,17 @@ export const services = [
 // わたしたちの強み（トップ・会社概要で使用）。
 export const strengths = [
   {
+    icon: "target",
     title: "現場起点で考える",
     body: "電話・紙・FAXが残る現場に入り込み、机上ではなく「実際に使われる形」から設計します。",
   },
   {
+    icon: "layers",
     title: "企画から運用まで一貫",
     body: "要件定義・デザイン・開発・運用までを一つのチームで担い、責任を持って届けます。",
   },
   {
+    icon: "shield",
     title: "長く使える品質",
     body: "派手さより誠実さ。日々の業務に溶け込み、長く信頼できる道具のようなプロダクトを。",
   },

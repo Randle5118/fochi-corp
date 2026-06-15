@@ -16,7 +16,12 @@ export default function Footer() {
       <Container>
         <div className="grid gap-xl py-2xl md:grid-cols-3">
           <div>
-            <div className="text-lg font-bold text-ink">{site.name}</div>
+            <div className="flex items-center gap-sm">
+              <span className="flex h-8 w-8 items-center justify-center rounded-md bg-primary text-base font-bold text-white">
+                F
+              </span>
+              <span className="text-lg font-bold text-ink">{site.name}</span>
+            </div>
             <p className="mt-sm text-sm text-ink-muted">{site.tagline}</p>
             <a
               href={`mailto:${site.email}`}

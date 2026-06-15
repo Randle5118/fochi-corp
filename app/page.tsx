@@ -5,6 +5,7 @@ import Button from "@/components/Button";
 import CtaBand from "@/components/CtaBand";
 import { newsRepo, NEWS_CATEGORY_LABEL } from "@/lib/content";
 import { services, strengths } from "@/lib/site";
+import { Icon, IconTile } from "@/components/icons";
 import { getMetadata } from "@/lib/seo";
 
 export const metadata = getMetadata({ path: "/" });
@@ -23,15 +24,13 @@ export default async function HomePage() {
         lead="技術のための技術ではなく、現場で本当に役立つ仕組みを。"
       >
         <div className="grid gap-md md:grid-cols-3">
-          {strengths.map((s, i) => (
+          {strengths.map((s) => (
             <div
               key={s.title}
               className="rounded-md border border-border bg-surface p-lg transition-colors hover:border-primary"
             >
-              <span className="text-sm font-medium tabular-nums text-primary">
-                {String(i + 1).padStart(2, "0")}
-              </span>
-              <h3 className="mt-sm text-lg">{s.title}</h3>
+              <IconTile name={s.icon} />
+              <h3 className="mt-md text-lg">{s.title}</h3>
               <p className="mt-xs text-sm text-ink-muted">{s.body}</p>
             </div>
           ))}
@@ -46,22 +45,21 @@ export default async function HomePage() {
         lead="ソフトウェアで、現場の課題を解決します。"
       >
         <div className="grid gap-md md:grid-cols-3">
-          {services.map((s, i) => (
+          {services.map((s) => (
             <Link
               key={s.slug}
               href={`/services#${s.slug}`}
               className="group flex flex-col rounded-md border border-border bg-surface p-lg transition-colors hover:border-primary"
             >
-              <span className="text-sm font-medium tabular-nums text-primary">
-                {String(i + 1).padStart(2, "0")}
-              </span>
-              <h3 className="mt-sm text-lg">{s.name}</h3>
+              <IconTile name={s.icon} />
+              <h3 className="mt-md text-lg">{s.name}</h3>
               <p className="mt-xs flex-1 text-sm text-ink-muted">{s.summary}</p>
-              <span className="mt-md text-sm font-medium text-primary">
+              <span className="mt-md inline-flex items-center gap-xs text-sm font-medium text-primary">
                 詳しく見る
-                <span className="ml-2xs transition-transform group-hover:translate-x-0.5">
-                  →
-                </span>
+                <Icon
+                  name="arrowRight"
+                  className="h-4 w-4 transition-transform group-hover:translate-x-0.5"
+                />
               </span>
             </Link>
           ))}
