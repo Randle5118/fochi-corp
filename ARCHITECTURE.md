@@ -94,7 +94,7 @@ Supabase は既存資産だが、編集UIを自前で作る必要があり「非
 
 ## 3. デザインシステム
 
-- 真実の源は **`monthly_parking/DESIGN.md`**（Industrial / Utilitarian、Noto Sans JP、主色は藤鼠 `#6E75A4`）。
+- 真実の源は **`monthly_parking/DESIGN.md`**（Industrial / Utilitarian、Noto Sans JP、主色は青緑 `#00A5BF`）。
 - トークンは `tailwind.config.ts` に移植済み（colors / fontSize / spacing / radius / maxWidth）。
 - **ルール:** 色・余白・字種を変えるときは、まず `DESIGN.md` を確認し、勝手に逸脱しない。
   `tailwind.config.ts` のトークンを使い、生のカラーコードをコンポーネントに直書きしない。

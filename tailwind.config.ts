@@ -1,8 +1,8 @@
 import type { Config } from "tailwindcss";
 
 // デザイントークンは monthly_parking/DESIGN.md（Industrial/Utilitarian）から移植。
-// 主色は日本の伝統色「藤鼠（Fujinezumi, #6E75A4）」。落ち着いた青紫グレーを基調に、
-// ニュートラル（surface/border/ink）もわずかに紫みへ寄せて調和させている。
+// 主色は青緑（ティール, #00A5BF）。クリアで先進的な印象を基調に、
+// ニュートラル（surface/border/ink）もわずかに青緑みへ寄せて調和させている。
 // 変更する場合は DESIGN.md を真実の源とし、両者を同期させること。
 const config: Config = {
   content: [
@@ -14,18 +14,18 @@ const config: Config = {
     extend: {
       colors: {
         primary: {
-          DEFAULT: "#6E75A4", // 藤鼠 Fujinezumi
-          hover: "#585E89",
-          light: "#ECEDF5",
+          DEFAULT: "#00A5BF", // 青緑 / ティール
+          hover: "#0089A0",
+          light: "#DCF1F5",
         },
         surface: {
           DEFAULT: "#FFFFFF",
-          alt: "#F6F6FA",
+          alt: "#F4F8F9",
         },
-        border: "#E4E4ED",
+        border: "#DCE6E8",
         ink: {
-          DEFAULT: "#232634",
-          muted: "#6B6E80",
+          DEFAULT: "#16303A",
+          muted: "#5C6B70",
         },
         success: { DEFAULT: "#16A34A", light: "#DCFCE7" },
         warning: { DEFAULT: "#D97706", light: "#FEF3C7" },
