@@ -17,7 +17,7 @@ export default function Header() {
             href="/"
             className="flex items-center gap-sm text-xl font-bold tracking-tight text-ink"
           >
-            <span className="flex h-8 w-8 items-center justify-center rounded-md bg-primary text-base font-bold text-white">
+            <span className="flex h-8 w-8 items-center justify-center rounded-md bg-gradient-to-br from-primary to-primary-hover text-base font-bold text-white">
               F
             </span>
             {site.name}

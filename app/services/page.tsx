@@ -31,7 +31,7 @@ export default function ServicesPage() {
             <div
               key={s.slug}
               id={s.slug}
-              className="scroll-mt-20 rounded-lg border border-border bg-surface p-lg transition-colors hover:border-primary md:p-xl"
+              className="scroll-mt-20 rounded-lg border border-border bg-surface p-lg transition-all hover:border-primary hover:shadow-sm md:p-xl"
             >
               <div className="grid gap-md md:grid-cols-[1fr_1.2fr] md:gap-xl">
                 <div>

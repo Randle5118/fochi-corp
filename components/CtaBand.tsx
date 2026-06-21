@@ -13,7 +13,7 @@ export default function CtaBand({
   return (
     <section className="bg-surface py-2xl md:py-3xl">
       <Container>
-        <div className="rounded-lg bg-primary px-lg py-2xl text-center md:px-2xl">
+        <div className="rounded-lg bg-gradient-to-br from-primary to-primary-hover px-lg py-2xl text-center md:px-2xl">
           <h2 className="text-2xl tracking-tight text-white md:text-3xl">
             {title}
           </h2>

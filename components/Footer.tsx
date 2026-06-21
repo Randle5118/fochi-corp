@@ -17,7 +17,7 @@ export default function Footer() {
         <div className="grid gap-xl py-2xl md:grid-cols-3">
           <div>
             <div className="flex items-center gap-sm">
-              <span className="flex h-8 w-8 items-center justify-center rounded-md bg-primary text-base font-bold text-white">
+              <span className="flex h-8 w-8 items-center justify-center rounded-md bg-gradient-to-br from-primary to-primary-hover text-base font-bold text-white">
                 F
               </span>
               <span className="text-lg font-bold text-ink">{site.name}</span>

@@ -27,7 +27,7 @@ export default async function HomePage() {
           {strengths.map((s) => (
             <div
               key={s.title}
-              className="rounded-md border border-border bg-surface p-lg transition-colors hover:border-primary"
+              className="rounded-md border border-border bg-surface p-lg transition-all hover:border-primary hover:shadow-sm"
             >
               <IconTile name={s.icon} />
               <h3 className="mt-md text-lg">{s.title}</h3>
@@ -49,7 +49,7 @@ export default async function HomePage() {
             <Link
               key={s.slug}
               href={`/services#${s.slug}`}
-              className="group flex flex-col rounded-md border border-border bg-surface p-lg transition-colors hover:border-primary"
+              className="group flex flex-col rounded-md border border-border bg-surface p-lg transition-all hover:border-primary hover:shadow-sm"
             >
               <IconTile name={s.icon} />
               <h3 className="mt-md text-lg">{s.name}</h3>
