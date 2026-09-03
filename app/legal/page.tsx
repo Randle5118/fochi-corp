@@ -10,6 +10,8 @@ export const metadata = getMetadata({
 
 // ⚠️ PLACEHOLDER：有償サービスの提供形態に応じて、販売価格・支払方法・
 // 提供時期・返品等の項目を自社の取引条件に合わせて確定すること。
+// 事業者名・所在地・電話番号は特定商取引法で開示が義務づけられているため、
+// 公開前に必ず lib/site.ts の PLACEHOLDER を登記情報へ差し替えること。
 const rows: { label: string; value: string }[] = [
   { label: "販売事業者", value: company.legalName },
   { label: "運営責任者", value: company.representative },
@@ -17,7 +19,8 @@ const rows: { label: string; value: string }[] = [
     label: "所在地",
     value: `${company.address.postalCode} ${company.address.line}`,
   },
-  { label: "連絡先", value: site.email },
+  { label: "電話番号", value: company.tel },
+  { label: "メールアドレス", value: site.email },
   { label: "販売価格", value: "各サービスの申込ページに表示します。" },
   {
     label: "代金の支払時期・方法",

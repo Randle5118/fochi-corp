@@ -7,10 +7,16 @@ export function getMetadata({
   title,
   description,
   path = "/",
+  type = "website",
+  publishedTime,
 }: {
   title?: string;
   description?: string;
   path?: string;
+  /** お知らせ詳細など、記事ページは "article" を指定する。 */
+  type?: "website" | "article";
+  /** type: "article" のときの公開日（YYYY-MM-DD）。 */
+  publishedTime?: string;
 } = {}): Metadata {
   const fullTitle = title ? `${title} | ${site.name}` : site.name;
   const desc = description ?? site.description;
@@ -27,7 +33,9 @@ export function getMetadata({
       url,
       siteName: site.name,
       locale: site.locale,
-      type: "website",
+      ...(type === "article"
+        ? { type: "article" as const, publishedTime }
+        : { type: "website" as const }),
     },
     twitter: {
       card: "summary_large_image",

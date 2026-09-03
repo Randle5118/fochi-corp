@@ -7,6 +7,9 @@ import { getMetadata } from "@/lib/seo";
 
 type Params = { slug: string };
 
+// 既知の slug 以外はビルド時に確定した 404 を返す（実行時レンダリングをさせない）。
+export const dynamicParams = false;
+
 // 全 slug を静的生成（SSG）。
 export async function generateStaticParams() {
   const slugs = await newsRepo.listSlugs();
@@ -25,6 +28,8 @@ export async function generateMetadata({
     title: article.title,
     description: article.excerpt,
     path: `/news/${slug}`,
+    type: "article",
+    publishedTime: article.publishedAt,
   });
 }
 

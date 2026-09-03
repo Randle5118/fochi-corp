@@ -38,8 +38,9 @@ export default function Header() {
           <button
             type="button"
             className="md:hidden"
-            aria-label="メニューを開く"
+            aria-label={open ? "メニューを閉じる" : "メニューを開く"}
             aria-expanded={open}
+            aria-controls="mobile-nav"
             onClick={() => setOpen((v) => !v)}
           >
             <span className="block h-0.5 w-6 bg-ink" />
@@ -50,7 +51,10 @@ export default function Header() {
 
         {/* モバイルメニュー */}
         {open && (
-          <nav className="flex flex-col gap-xs border-t border-border py-md md:hidden">
+          <nav
+            id="mobile-nav"
+            className="flex flex-col gap-xs border-t border-border py-md md:hidden"
+          >
             {nav.map((item) => (
               <Link
                 key={item.href}

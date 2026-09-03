@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { useActionState } from "react";
 import { submitContact, type ContactState } from "./actions";
 
@@ -74,6 +75,17 @@ export default function ContactForm() {
         <label htmlFor="company_url">Company URL</label>
         <input id="company_url" name="company_url" tabIndex={-1} autoComplete="off" />
       </div>
+
+      <p className="text-sm text-ink-muted">
+        送信いただいた個人情報は、お問い合わせへの対応のみに利用します。
+        <Link
+          href="/privacy-policy"
+          className="text-primary hover:underline"
+        >
+          プライバシーポリシー
+        </Link>
+        に同意のうえ送信してください。
+      </p>
 
       <button
         type="submit"

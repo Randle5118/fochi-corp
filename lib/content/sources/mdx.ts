@@ -1,5 +1,6 @@
 import fs from "node:fs";
 import path from "node:path";
+import { cache } from "react";
 import matter from "gray-matter";
 import type { NewsRepository } from "../repository";
 import {
@@ -13,7 +14,9 @@ import {
 // （理由は repository.ts / schema.ts のコメントを参照）。
 const NEWS_DIR = path.join(process.cwd(), "content", "news");
 
-function readAll(): NewsArticle[] {
+// 1 リクエスト（＝1 ページのビルド）内では読み込み結果を使い回す。
+// list / getBySlug / listSlugs が同一ページで複数回呼ばれても再パースしない。
+const readAll = cache((): NewsArticle[] => {
   if (!fs.existsSync(NEWS_DIR)) return [];
 
   const files = fs.readdirSync(NEWS_DIR).filter((f) => f.endsWith(".mdx"));
@@ -22,14 +25,26 @@ function readAll(): NewsArticle[] {
     const slug = file.replace(/\.mdx$/, "");
     const raw = fs.readFileSync(path.join(NEWS_DIR, file), "utf-8");
     const { data, content } = matter(raw);
-    const fm = NewsFrontmatter.parse(data);
-    return { ...fm, slug, body: content } satisfies NewsArticle;
+
+    // 検証エラーにファイル名を添える（どの記事が悪いか分からないまま
+    // ビルドが落ちるのを防ぐ）。
+    const parsed = NewsFrontmatter.safeParse(data);
+    if (!parsed.success) {
+      const detail = parsed.error.issues
+        .map((i) => `${i.path.join(".")}: ${i.message}`)
+        .join(" / ");
+      throw new Error(
+        `お知らせのフロントマターが不正です: content/news/${file} — ${detail}`,
+      );
+    }
+
+    return { ...parsed.data, slug, body: content } satisfies NewsArticle;
   });
 
   return articles
     .filter((a) => !a.draft)
     .sort((a, b) => b.publishedAt.localeCompare(a.publishedAt));
-}
+});
 
 function toSummary({ body: _body, ...rest }: NewsArticle): NewsSummary {
   return rest;

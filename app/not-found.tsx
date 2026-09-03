@@ -1,5 +1,12 @@
 import Section from "@/components/Section";
 import Button from "@/components/Button";
+import { getMetadata } from "@/lib/seo";
+
+// noindex は Next.js が not-found ルートに自動付与するため、ここでは指定しない。
+export const metadata = getMetadata({
+  title: "ページが見つかりません",
+  description: "お探しのページは移動または削除された可能性があります。",
+});
 
 export default function NotFound() {
   return (
