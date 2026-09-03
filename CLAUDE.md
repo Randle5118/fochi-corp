@@ -14,6 +14,8 @@
 4. **会社情報・ナビ・URL は `lib/site.ts` から参照。** ページに直書きしない。
 5. **法務ページ（`/privacy-policy`・`/legal`）は削除しない。** 日本では必須。
 6. **言語は日本語単一**（`lang="ja"`）。英語化は `next-intl` 導入時にまとめて行う。
+7. **`components/Markdown.tsx` に `rehype-raw` を再追加しない。** 生 HTML を通すと、
+   CMS 移行後に外部編集者の入力が XSS の入口になる。必要なら `rehype-sanitize` と必ずセットで。
 
 ---
 
@@ -27,6 +29,8 @@ app/                    App Router のページ（= ルーティング）
   contact/              フォーム（page.tsx / ContactForm.tsx / actions.ts）
   privacy-policy/ legal/ 法務ページ（必須・削除禁止）
   sitemap.ts robots.ts  自動生成（next-sitemap は使わない）
+  icon.svg              ファビコン
+  opengraph-image.tsx   OG 画像を全ページ分ビルド時生成（ラテン文字のみ）
 components/             共通 UI（Container/Section/Button/Header/Footer/Hero/Markdown）
 content/news/*.mdx      お知らせ本文（フロントマター + Markdown）
 lib/
@@ -46,8 +50,21 @@ lib/
 
 ### お知らせを1件追加する
 1. `content/news/YYYY-MM-DD-<slug>.mdx` を作成。
-2. フロントマターを記入：`title` / `publishedAt`（`YYYY-MM-DD`）/ `category`（`news`|`press`|`product`|`recruit`）/ `excerpt`（任意）/ `draft`（任意, 既定 false）。
-3. 本文は Markdown で書く（**JSX 禁止**）。
+2. フロントマターを記入：
+
+   ```yaml
+   ---
+   title: 記事タイトル
+   publishedAt: "2026-09-01"   # ← 必ずダブルクォートで囲む（YYYY-MM-DD）
+   category: news              # news | press | product | recruit
+   excerpt: 一覧・OG に出る要約（任意）
+   draft: false                # 任意, 既定 false
+   ---
+   ```
+
+   **`publishedAt` は必ず引用符で囲むこと。** 裸の `2026-09-01` は YAML が
+   Date 型として解釈するため。スキーマ側でも正規化しているが、引用符付きが正。
+3. 本文は Markdown で書く（**JSX 禁止**、生 HTML も描画されない）。
 → 一覧・詳細・トップ・sitemap に自動反映。コード変更不要。
 
 ### 静的ページを追加する

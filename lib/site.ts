@@ -18,12 +18,14 @@ export const site = {
 export const company = {
   legalName: "株式会社Fochi",
   representative: "代表取締役　＿＿＿＿", // PLACEHOLDER
-  founded: "2024年", // PLACEHOLDER
+  founded: "＿＿＿＿年＿＿月", // PLACEHOLDER
   capital: "＿＿＿＿円", // PLACEHOLDER
   address: {
     postalCode: "〒000-0000", // PLACEHOLDER
     line: "東京都＿＿区＿＿＿＿", // PLACEHOLDER
   },
+  // 特定商取引法の表記に必須。公開前に必ず実在の番号へ差し替えること。
+  tel: "000-0000-0000", // PLACEHOLDER
   business: [
     "月極駐車場管理SaaSの開発・運営",
     "不動産管理業務のDX支援",

@@ -36,7 +36,8 @@
 - **Next.js 15 App Router + TypeScript** — プロダクトとバージョンを揃え、認知負荷を下げる。
 - **Tailwind CSS** — デザイントークンは `monthly_parking/DESIGN.md` を真実の源として移植。
   MUI / daisyUI は**入れない**（コーポレートサイトには重すぎる）。
-- **react-markdown + remark-gfm + rehype-raw** — お知らせ本文の描画。
+- **react-markdown + remark-gfm** — お知らせ本文の描画。
+  `rehype-raw` は**意図的に外している**（原則 D を参照）。
 - **gray-matter** — フロントマターの解析。
 - **Resend** — お問い合わせ送信（Server Action 経由）。
 - **Vercel** — デプロイ。プロダクトとは別 project / 別ドメイン。
@@ -90,6 +91,22 @@ lib/content/
 **推奨 CMS:** microCMS（日本市場で最も普及、日本語UI・サポート、非エンジニアが扱いやすい）。
 Supabase は既存資産だが、編集UIを自前で作る必要があり「非エンジニアが字を直す」用途には不向き。
 
+### 原則 D — 本文に生 HTML を通さない（`rehype-raw` を入れない）
+
+原則 A・B の帰結として、**本文の出所はいずれ「リポジトリ内の信頼できるファイル」から
+「CMS の編集者が書いた信頼できない入力」に変わる。** その日に備え、
+`components/Markdown.tsx` では `rehype-raw` を使わない。react-markdown は既定で
+生 HTML を無視する＝サニタイズ済みの状態であり、これを崩さないこと。
+
+HTML 表現がどうしても必要になった場合は、`rehype-raw` + `rehype-sanitize` を
+**必ずセットで**導入する（`rehype-raw` 単体の追加は禁止）。
+
+### 原則 E — フロントマターの日付は引用符付きで書く
+
+`publishedAt: 2026-09-01`（引用符なし）は YAML が `Date` 型として解釈するため、
+Zod の文字列スキーマを通らずビルドが落ちる。記事側は `publishedAt: "2026-09-01"` と書き、
+`schema.ts` 側でも Date → `YYYY-MM-DD` へ正規化して二重に守る。
+
 ---
 
 ## 3. デザインシステム
@@ -113,6 +130,8 @@ Supabase は既存資産だが、編集UIを自前で作る必要があり「非
 
 - `/privacy-policy`（個人情報保護方針）と `/legal`（特定商取引法に基づく表記）は**必須**。削除しない。
 - 文面・表記は **PLACEHOLDER**。公開前に法務確認の上、自社の運用に合わせて確定すること。
+- 特商法は **事業者名・所在地・電話番号**の開示を義務づけている。`lib/site.ts` の
+  `company.tel` / `company.address` / `company.representative` は公開前に必ず実データへ差し替える。
 
 ---
 
@@ -127,8 +146,15 @@ Supabase は既存資産だが、編集UIを自前で作る必要があり「非
 ## 7. お問い合わせフォーム
 
 - Server Action（`app/contact/actions.ts`）→ Resend。
-- スパム対策は**ハニーポット**（`company_url` 隠しフィールド）。値が入っていれば bot とみなし黙って破棄。
+- スパム対策は 2 層：
+  1. **ハニーポット**（`company_url` 隠しフィールド）。値が入っていれば bot とみなし黙って破棄。
+  2. **レート制限**（同一 IP から 10 分に 3 通まで）。Server Action のエンドポイントは
+     フォームを経由せず直接繰り返し呼べるため、ハニーポットだけでは受信箱と
+     Resend の送信枠を守れない。
+     ⚠️ プロセス内メモリ実装のため複数インスタンス間で共有されない（＝厳密な上限ではない）。
+     強い保証が必要になったら Upstash Redis 等の外部ストアに差し替えること。
 - 入力検証は Zod。エラーメッセージは日本語。
+- フォームには個人情報の利用目的とプライバシーポリシーへの導線を明示する。
 
 ---
 
@@ -137,6 +163,11 @@ Supabase は既存資産だが、編集UIを自前で作る必要があり「非
 - Vercel に独立 project として配置。本番ドメイン `fochi.co.jp`。
 - 必要な環境変数は `.env.example` 参照（`RESEND_API_KEY` ほか）。
 - `sitemap.xml` / `robots.txt` は `app/sitemap.ts` / `app/robots.ts` で生成（next-sitemap は使わない）。
+  静的ページには `lastModified` を付けない（ビルド時刻を入れると毎デプロイで全ページの
+  lastmod が変わり、シグナルとして無意味になるため）。お知らせは `publishedAt` を使う。
+- ファビコン（`app/icon.svg`）と OG 画像（`app/opengraph-image.tsx`）は Next.js の
+  ファイル規約で全ページに自動適用される。OG 画像の描画テキストは**ラテン文字のみ**
+  （`ImageResponse` の既定フォントに日本語グリフが無く、和文は豆腐になる）。
 
 ---
 
@@ -150,3 +181,7 @@ Supabase は既存資産だが、編集UIを自前で作る必要があり「非
 | 2026-06-12 | スキーマを microCMS 慣例に寄せる | 移行時のマッピングを1:1に |
 | 2026-06-12 | デザイントークンは DESIGN.md から移植（共有パッケージ化しない） | 要件が単純で過剰設計を避ける |
 | 2026-06-12 | ルールを ARCHITECTURE.md / CLAUDE.md / .cursor の3層に役割分担（重複させない） | monthly_parking の慣例に合わせつつ、保守時の drift を防ぐ |
+| 2026-09-03 | `rehype-raw` を削除（原則 D） | CMS 移行後、本文が信頼できない入力になり XSS の入口になるため |
+| 2026-09-03 | `publishedAt` を Date→文字列に正規化＋引用符を必須化（原則 E） | 引用符なし日付で `generateStaticParams` がビルド落ちするのを防ぐ |
+| 2026-09-03 | お問い合わせにレート制限を追加 | Server Action は直接連投できるため、ハニーポットだけでは不十分 |
+| 2026-09-03 | Next.js を 15.5.25 へ（16 には上げない） | 既知脆弱性の解消。メジャー更新はプロダクト側と足並みを揃えて行う |

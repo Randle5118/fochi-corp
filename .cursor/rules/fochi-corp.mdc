@@ -18,6 +18,8 @@ Next.js 15 (App Router) + TypeScript + Tailwind CSS。
 4. 会社情報・ナビ・URL は `lib/site.ts` から参照。ページに直書きしない。
 5. 法務ページ（`/privacy-policy`・`/legal`）は削除しない。
 6. 言語は日本語単一（`lang="ja"`）。
+7. `components/Markdown.tsx` に `rehype-raw` を再追加しない（生 HTML = CMS 移行後の XSS 入口）。
+8. お知らせの `publishedAt` は必ず引用符付き（`"2026-09-01"`）。裸の日付は YAML が Date にしてビルドが落ちる。
 
 ## 作業の型
 - ページは `app/**/page.tsx`、共通 UI は `components/`、サーバ処理は Server Action（`actions.ts`）。

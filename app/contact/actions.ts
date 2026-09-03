@@ -1,5 +1,6 @@
 "use server";
 
+import { headers } from "next/headers";
 import { z } from "zod";
 import { sendContactEmail } from "@/lib/resend";
 
@@ -15,6 +16,45 @@ export type ContactState = {
   ok: boolean;
   error?: string;
 };
+
+// ---- 簡易レート制限 --------------------------------------------------------
+// Server Action のエンドポイントは直接繰り返し呼べるため、ハニーポットだけでは
+// 受信箱と Resend の送信枠を守れない。同一 IP からの連投を弾く。
+//
+// ⚠️ プロセス内メモリのため、Vercel の複数インスタンス間では共有されない
+// （＝厳密な上限ではなく「速度制限」）。より強い保証が必要になったら
+// Upstash Redis などの外部ストアに差し替えること。
+const RATE_LIMIT_MAX = 3; // 同一 IP からの許容送信数
+const RATE_LIMIT_WINDOW_MS = 10 * 60 * 1000; // 10 分
+const recentSubmissions = new Map<string, number[]>();
+
+async function clientIp(): Promise<string> {
+  const h = await headers();
+  // Vercel は x-forwarded-for の先頭にクライアント IP を入れる。
+  return (
+    h.get("x-forwarded-for")?.split(",")[0]?.trim() ||
+    h.get("x-real-ip") ||
+    "unknown"
+  );
+}
+
+function isRateLimited(ip: string): boolean {
+  const now = Date.now();
+
+  // 期限切れのエントリを掃除して Map が無限に育たないようにする。
+  for (const [key, times] of recentSubmissions) {
+    const alive = times.filter((t) => now - t < RATE_LIMIT_WINDOW_MS);
+    if (alive.length === 0) recentSubmissions.delete(key);
+    else recentSubmissions.set(key, alive);
+  }
+
+  const times = recentSubmissions.get(ip) ?? [];
+  if (times.length >= RATE_LIMIT_MAX) return true;
+
+  recentSubmissions.set(ip, [...times, now]);
+  return false;
+}
+// ---------------------------------------------------------------------------
 
 export async function submitContact(
   _prev: ContactState,
@@ -34,6 +74,14 @@ export async function submitContact(
   // ハニーポットに値あり → bot。成功を装って黙って破棄する。
   if (parsed.data.company_url) {
     return { ok: true };
+  }
+
+  if (isRateLimited(await clientIp())) {
+    return {
+      ok: false,
+      error:
+        "送信回数の上限に達しました。しばらく時間をおいてから再度お試しください。",
+    };
   }
 
   try {

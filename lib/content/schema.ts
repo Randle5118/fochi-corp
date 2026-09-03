@@ -14,10 +14,20 @@ export const NEWS_CATEGORY_LABEL: Record<NewsCategory, string> = {
   recruit: "採用",
 };
 
+// 日付フィールド。YAML は引用符なしの `2026-09-01` を Date 型に変換してしまうため、
+// 文字列・Date のどちらで来ても `YYYY-MM-DD` の文字列に正規化する
+// （CMS 移行後は ISO 8601 文字列で来るので、その際もそのまま通る）。
+const PublishedAt = z.preprocess(
+  (v) => (v instanceof Date ? v.toISOString().slice(0, 10) : v),
+  z
+    .string()
+    .regex(/^\d{4}-\d{2}-\d{2}$/, "publishedAt は YYYY-MM-DD 形式で記述してください"),
+);
+
 // フロントマター（MDX ファイルの先頭メタ情報）のスキーマ。
 export const NewsFrontmatter = z.object({
   title: z.string(),
-  publishedAt: z.string(), // ISO 8601 (YYYY-MM-DD)
+  publishedAt: PublishedAt, // ISO 8601 (YYYY-MM-DD)
   category: NewsCategory.default("news"),
   excerpt: z.string().optional(),
   eyecatch: z.string().optional(), // アイキャッチ画像URL
