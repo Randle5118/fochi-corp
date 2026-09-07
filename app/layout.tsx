@@ -3,6 +3,7 @@ import type { Viewport } from "next";
 import { Noto_Sans_JP } from "next/font/google";
 import { getMetadata } from "@/lib/seo";
 import Header from "@/components/Header";
+import SiteBackdrop from "@/components/SiteBackdrop";
 import Footer from "@/components/Footer";
 import "./globals.css";
 
@@ -25,6 +26,8 @@ export default function RootLayout({ children }: { children: ReactNode }) {
   return (
     <html lang="ja" className={notoSansJP.variable}>
       <body className="flex min-h-screen flex-col">
+        {/* 全ページ共通の地。ページごとには置かない。 */}
+        <SiteBackdrop />
         <Header />
         <main className="flex-1">{children}</main>
         <Footer />

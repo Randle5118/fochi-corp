@@ -10,7 +10,7 @@ export default function Header() {
   const [open, setOpen] = useState(false);
 
   return (
-    <header className="sticky top-0 z-50 border-b border-border bg-surface/90 backdrop-blur">
+    <header className="sticky top-0 z-50 border-b border-border bg-surface">
       <Container>
         <div className="flex h-16 items-center justify-between">
           <Link href="/" className="text-xl font-bold tracking-tight text-ink">

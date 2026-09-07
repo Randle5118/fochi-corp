@@ -44,7 +44,7 @@ export default async function NewsDetailPage({
   if (!article) notFound();
 
   return (
-    <article className="bg-surface py-2xl md:py-3xl">
+    <article className="bg-surface/90 py-2xl md:py-3xl">
       <Container className="max-w-3xl">
         <div className="flex items-center gap-md">
           <time className="text-sm tabular-nums text-ink-muted">
