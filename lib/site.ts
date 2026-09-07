@@ -3,15 +3,15 @@
 export const site = {
   name: "株式会社Fochi",
   nameEn: "Fochi, Inc.",
-  tagline: "駐車場経営を、もっとシンプルに。",
+  tagline: "納得は、一緒に探すもの。",
   description:
-    "株式会社Fochiは、月極駐車場管理SaaSをはじめとする不動産テック事業を通じて、駐車場経営の効率化を支援します。",
+    "株式会社Fochiは、月極駐車場の満空管理サービス monthly-parking の開発・運営と、プロダクト・業務づくりのご相談を行っています。",
   // 本番ドメイン。apex（fochi.jp）は www へ 308 リダイレクトされるため、
   // canonical / og:url / sitemap には www 付きを正規として使う。
   domain: "www.fochi.jp",
   url: "https://www.fochi.jp",
   // プロダクト（monthly_parking）の本番URL。
-  // 現在サイト上に導線は置いていない（下記コメント参照）。
+  // COPY.md 3-5 / 4-2 の導線はこの値を参照する（app.fochi.co.jp は存在しない）。
   appUrl: "https://monthly-parking.jp",
   // ⚠️ 暫定：コーポレート側のメールが未整備のため、プロダクト側の窓口に寄せている。
   // ドメインを統一する際に info@fochi.jp 等へ差し替えること。
@@ -32,9 +32,8 @@ export const company = {
   // 特定商取引法の表記に必須。公開前に必ず実在の番号へ差し替えること。
   tel: "000-0000-0000", // PLACEHOLDER
   business: [
-    "月極駐車場管理SaaSの開発・運営",
-    "不動産管理業務のDX支援",
-    "Webサービスの企画・開発",
+    "月極駐車場の満空管理・一次受付サービスの開発・運営",
+    "プロダクト・業務づくりのご相談、受託開発",
   ],
 } as const;
 

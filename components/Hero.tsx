@@ -12,9 +12,13 @@ export default function Hero() {
           <h1 className="mt-md text-3xl font-bold leading-tight tracking-tight md:text-[44px]">
             {site.tagline}
           </h1>
-          <p className="mt-lg text-lg text-ink-muted">{site.description}</p>
+          {/* COPY.md 3-1。会社概要文ではなく Hero 固有のコピー。 */}
+          <div className="mt-lg space-y-xs text-lg text-ink-muted">
+            <p>ただ、自分が納得できていないものは出しません。</p>
+            <p>そこだけは、一人で決めています。</p>
+          </div>
           <div className="mt-xl flex flex-wrap gap-sm">
-            <Button href="/services">事業内容を見る</Button>
+            <Button href="/services">やっていることを見る</Button>
             <Button href="/contact" variant="ghost">
               お問い合わせ
             </Button>
