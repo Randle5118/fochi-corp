@@ -3,7 +3,6 @@ import Hero from "@/components/Hero";
 import Section from "@/components/Section";
 import Button from "@/components/Button";
 import { newsRepo, NEWS_CATEGORY_LABEL } from "@/lib/content";
-import { site } from "@/lib/site";
 import { getMetadata } from "@/lib/seo";
 
 export const metadata = getMetadata({ path: "/" });
@@ -66,38 +65,33 @@ export default async function HomePage() {
         </div>
       </Section>
 
-      {/* やっていること（COPY.md 3-5） */}
+      {/* やっていること（COPY.md 3-5）
+          順番は「一緒に考える → つくる」。IT の会社であることを先に示し、
+          自社開発をその裏づけとして続ける。入れ替えないこと。
+          トップではプロダクト名も受託メニューも出さない（導線は /services に集約）。 */}
       <Section alt title="やっていること">
         <div className="grid gap-md md:grid-cols-2">
           <div className="rounded-md border border-border bg-surface p-lg">
-            <p className="text-2xs font-medium text-ink-muted">自分の課題として</p>
-            <h3 className="mt-2xs text-lg">つくる</h3>
+            <h3 className="text-lg">一緒に考える</h3>
             <p className="mt-sm text-sm text-ink-muted">
-              月極駐車場の満空管理と一次受付のサービスを、開発・運営しています。
+              持ち込まれた困りごとを、要件になる手前の整理から一緒に。
             </p>
-            <a
-              href={site.appUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="mt-md inline-block text-sm text-primary hover:underline"
-            >
-              monthly-parking を見る →
-            </a>
           </div>
 
           <div className="rounded-md border border-border bg-surface p-lg">
-            <p className="text-2xs font-medium text-ink-muted">相手の課題として</p>
-            <h3 className="mt-2xs text-lg">一緒に考える</h3>
+            <h3 className="text-lg">つくる</h3>
             <p className="mt-sm text-sm text-ink-muted">
-              つくる前の整理から、小さくつくって試すところまで。
+              気づいたことは、自分でもつくって運んでいます。
             </p>
-            <Link
-              href="/services"
-              className="mt-md inline-block text-sm text-primary hover:underline"
-            >
-              詳しく見る →
-            </Link>
           </div>
+        </div>
+        <div className="mt-xl">
+          <Link
+            href="/services"
+            className="text-sm text-primary hover:underline"
+          >
+            詳しく見る →
+          </Link>
         </div>
       </Section>
 
@@ -132,10 +126,15 @@ export default async function HomePage() {
         </div>
       </Section>
 
-      {/* CTA（COPY.md 3-7：見出し1行 + ボタンのみ。補足文は置かない） */}
+      {/* CTA（COPY.md 3-7：見出し + 補足2行 + ボタン） */}
       <Section alt>
         <div className="rounded-lg border border-border bg-surface p-xl text-center md:p-2xl">
           <h2 className="text-2xl tracking-tight">一緒に、納得を探しませんか。</h2>
+          {/* 補足は2行まで（COPY.md 3-7）。キーワードは置かない。 */}
+          <div className="mx-auto mt-sm max-w-xl space-y-2xs text-ink-muted">
+            <p>技術のことも、業務のことも。</p>
+            <p>「これ、どうにかならないか」という段階から、ご一緒します。</p>
+          </div>
           <div className="mt-lg flex flex-wrap justify-center gap-sm">
             <Button href="/contact">お問い合わせ</Button>
           </div>
