@@ -3,7 +3,7 @@ import Hero from "@/components/Hero";
 import Section from "@/components/Section";
 import Button from "@/components/Button";
 import { newsRepo, NEWS_CATEGORY_LABEL } from "@/lib/content";
-import { company, site } from "@/lib/site";
+import { company } from "@/lib/site";
 import { getMetadata } from "@/lib/seo";
 
 export const metadata = getMetadata({ path: "/" });
@@ -80,9 +80,6 @@ export default async function HomePage() {
           </p>
           <div className="mt-lg flex flex-wrap justify-center gap-sm">
             <Button href="/contact">お問い合わせ</Button>
-            <Button href={site.appUrl} external variant="ghost">
-              プロダクトを見る
-            </Button>
           </div>
         </div>
       </Section>

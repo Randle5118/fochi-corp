@@ -22,7 +22,7 @@
 |---|---|---|
 | 性質 | ログイン後に操作する Web アプリ / ダッシュボード | 公開・SEO 重視のマーケティングサイト |
 | 主なレンダリング | SSR / Client（認証・即時データ） | **SSG / ISR**（内容変動が少なく、高速・被クロール重視） |
-| ドメイン | `app.fochi.co.jp` | `fochi.co.jp` |
+| ドメイン | `monthly-parking.jp` | `www.fochi.jp` |
 | リポジトリ | 別リポジトリ | 別リポジトリ（本リポジトリ） |
 
 **ルール:** 2 つのサービスは意図的に分離している。共有が必要なものは
@@ -160,7 +160,9 @@ Zod の文字列スキーマを通らずビルドが落ちる。記事側は `pu
 
 ## 8. デプロイ / 環境変数
 
-- Vercel に独立 project として配置。本番ドメイン `fochi.co.jp`。
+- Vercel に独立 project として配置。本番ドメイン `www.fochi.jp`。
+  apex（`fochi.jp`）は www へ 308 リダイレクトされるため、`lib/site.ts` の `url` は
+  **www 付きを正規**とする（canonical / og:url / sitemap がここから生成されるため）。
 - 必要な環境変数は `.env.example` 参照（`RESEND_API_KEY` ほか）。
 - `sitemap.xml` / `robots.txt` は `app/sitemap.ts` / `app/robots.ts` で生成（next-sitemap は使わない）。
   静的ページには `lastModified` を付けない（ビルド時刻を入れると毎デプロイで全ページの

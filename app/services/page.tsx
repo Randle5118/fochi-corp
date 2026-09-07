@@ -1,6 +1,4 @@
 import Section from "@/components/Section";
-import Button from "@/components/Button";
-import { site } from "@/lib/site";
 import { getMetadata } from "@/lib/seo";
 
 export const metadata = getMetadata({
@@ -40,11 +38,6 @@ export default function ServicesPage() {
           <p className="mt-md max-w-2xl text-ink-muted">
             月極駐車場の申込・契約・テナント管理を、Webだけで完結できる管理SaaSを開発・運営しています。
           </p>
-          <div className="mt-lg">
-            <Button href={site.appUrl} external>
-              プロダクトを見る
-            </Button>
-          </div>
         </div>
       </Section>
 

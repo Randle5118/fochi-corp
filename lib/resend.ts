@@ -14,8 +14,11 @@ export async function sendContactEmail({
   replyTo?: string;
 }) {
   const apiKey = process.env.RESEND_API_KEY;
-  const from = process.env.CONTACT_FROM_EMAIL ?? "Fochi <noreply@fochi.co.jp>";
-  const to = process.env.CONTACT_TO_EMAIL ?? "info@fochi.co.jp";
+  // ⚠️ from のドメインは Resend 側で認証（DKIM/SPF）済みである必要がある。
+  // 未認証だと送信は失敗するため、実運用では CONTACT_FROM_EMAIL で明示すること。
+  const from = process.env.CONTACT_FROM_EMAIL ?? "Fochi <noreply@fochi.jp>";
+  // ⚠️ 暫定：コーポレート側のメールが未整備のため、プロダクト側の窓口に寄せている。
+  const to = process.env.CONTACT_TO_EMAIL ?? "admin@monthly-parking.jp";
 
   if (!apiKey) {
     throw new Error("RESEND_API_KEY is not set");
