@@ -2,6 +2,7 @@ import { ReactNode } from "react";
 import Container from "./Container";
 
 // セクション共通レイアウト。任意で見出し（title / lead）を表示。
+// 背景を 90% 不透明にして、SiteBackdrop の区画図をうっすら透かしつつ本文の可読性を保つ。
 export default function Section({
   title,
   lead,
@@ -17,7 +18,7 @@ export default function Section({
 }) {
   return (
     <section
-      className={`py-2xl md:py-3xl ${alt ? "bg-surface-alt" : "bg-surface"} ${className}`}
+      className={`py-2xl md:py-3xl ${alt ? "bg-surface-alt/90" : "bg-surface/90"} ${className}`}
     >
       <Container>
         {(title || lead) && (
