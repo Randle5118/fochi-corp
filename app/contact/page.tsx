@@ -14,7 +14,7 @@ export default function ContactPage() {
   return (
     <Section
       title="お問い合わせ"
-      lead="プロダクトのデモ・業務提携・その他ご相談を承っております。"
+      lead="プロダクトのご相談も、「これ、どうにかならないか」という段階のご相談も。"
     >
       <div className="grid gap-2xl md:grid-cols-[1fr_320px]">
         <div className="max-w-xl">
