@@ -21,13 +21,15 @@ export default function Hero() {
           <h1 className="mt-md text-3xl font-bold leading-tight tracking-tight md:text-[44px]">
             {site.tagline}
           </h1>
-          {/* COPY.md 3-1。会社概要文ではなく Hero 固有のコピー。 */}
-          <div className="mt-lg space-y-xs text-lg text-ink-muted">
-            <p>ただ、自分が納得できていないものは出しません。</p>
-            <p>そこだけは、一人で決めています。</p>
+          {/* 何の会社かをファーストビューで示す（2026-11 方針：自社サービスが主軸）。
+              H1 の「道具」は Fochi がつくるもの。ここで AI を「道具」と呼ばないこと。 */}
+          <div className="mt-lg max-w-2xl text-lg text-ink-muted">
+            <p>
+              株式会社Fochiは、少人数で自社サービスを開発・運営する会社です。現場の困りごとから入り、AIをはじめとする技術を使い分けて、業務の効率化を手の届く価格で実現します。
+            </p>
           </div>
           <div className="mt-xl flex flex-wrap gap-sm">
-            <Button href="/services">やっていることを見る</Button>
+            <Button href="/services">サービスを見る</Button>
             <Button href="/contact" variant="ghost">
               お問い合わせ
             </Button>

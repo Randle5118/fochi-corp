@@ -1,85 +1,35 @@
 import Section from "@/components/Section";
 import Button from "@/components/Button";
-import { site } from "@/lib/site";
+import { products } from "@/lib/site";
 import { getMetadata } from "@/lib/seo";
 
-// meta には「見つけてもらう言葉」を置く（COPY.md 2）。
+// meta には「見つけてもらう言葉」を置く。
 export const metadata = getMetadata({
-  title: "やっていること",
+  title: "事業内容",
   description:
-    "ITの活用・DX・業務効率化・可視化に関するご相談と受託開発、および自社プロダクトの開発・運営についてご紹介します。",
+    "株式会社Fochiの事業内容。月極駐車場の管理サービスなど自社サービスの開発・運営のほか、業務システムの開発やIT活用・業務効率化のご相談をお受けしています。",
   path: "/services",
 });
 
-// COPY.md 4-2。キーワードだけを並べず、必ず「その手前の整理から始めます」を添える。
+// ご相談・受託開発でお受けしていること。
 const consulting = [
-  "何をつくるか、何をつくらないかを決める",
+  "業務システム・Webサービスの開発",
   "業務を見て、仕組みにする場所を決める",
   "数字や状況が見えるようにする",
-  "小さくつくって、試す",
-  "壁打ちだけでも",
+  "何をつくるか、何をつくらないかの整理",
 ];
 
-// COPY.md 4-3。自社プロダクトは「カード1枚まで」。
-// ⚠️ 機能一覧・料金・「対象外」リストをここに書かないこと。
-// それはプロダクトサイトの担当で、二重管理になると必ず食い違う。
-// プロダクトが増えたら、同じ形のカードを下に足すだけにする。
-const products = [
-  {
-    name: "monthly-parking",
-    body: "月極駐車場の満空管理と一次受付のサービス。管理会社が、駐車場の問い合わせ対応に取られる時間を減らすためのものです。",
-    href: site.appUrl,
-  },
-];
-
+// 2026-11 方針：自社サービスの開発・運営が主軸、受託・ご相談は従。
+// 順番が主従を語る。「サービス」が上、「ご相談・受託開発」が下。入れ替えない。
 export default function ServicesPage() {
   return (
     <>
-      {/* COPY.md 4-2 一緒に考える（上段）。
-          順番が主従を語る。「一緒に考える」が上、「つくる」が下。入れ替えない。 */}
       <Section
-        title="やっていること"
-        lead="つくることと、一緒に考えること。どちらも、同じところから始まります。"
+        title="サービス"
+        lead="現場の困りごとから入り、機能を絞って、始めやすい料金で届けます。"
       >
-        <div className="rounded-lg border border-border bg-surface p-xl md:p-2xl">
-          <h2 className="text-2xl tracking-tight">一緒に考える</h2>
-          <div className="mt-md max-w-2xl space-y-md text-base text-ink-muted">
-            {/* この2行目を消さないこと。キーワードだけを並べた瞬間、
-                無数にある「DX支援会社」と区別がつかなくなる（COPY.md 4-2）。 */}
-            <p>
-              ITの活用、DX、業務効率化、可視化。
-              <br />
-              どれも、その手前の整理から始めます。
-            </p>
-          </div>
-
-          <ul className="mt-lg list-disc space-y-2xs pl-lg text-sm text-ink-muted">
-            {consulting.map((item) => (
-              <li key={item}>{item}</li>
-            ))}
-          </ul>
-
-          <p className="mt-lg max-w-2xl text-base text-ink-muted">
-            要件が固まる前の段階からご一緒できます。
-          </p>
-
-          <div className="mt-lg">
-            <Button href="/contact">お問い合わせ</Button>
-          </div>
-        </div>
-      </Section>
-
-      {/* COPY.md 4-3 つくる（下段）＝ 上段の裏づけ。
-          実績紹介ではなく「相談に乗れる」根拠として置いている。 */}
-      <Section alt title="つくる">
-        <div className="max-w-2xl space-y-md text-base text-ink-muted">
-          <p>相談を受けるだけでなく、自分でもつくって、運んでいます。</p>
-          <p>
-            つくる前に「何をつくらないか」を決めることに、いちばん時間をかけます。
-          </p>
-        </div>
-
-        <div className="mt-xl grid gap-md md:grid-cols-2">
+        {/* 機能一覧・料金はプロダクトサイトの担当。ここにはカードだけを置く。 */}
+        <div className="grid gap-md md:grid-cols-2">
           {products.map((product) => (
             <div
               key={product.name}
@@ -93,10 +43,32 @@ export default function ServicesPage() {
                 rel="noopener noreferrer"
                 className="mt-md inline-block text-sm text-primary hover:underline"
               >
-                サービスサイトを見る →
+                サービスサイトへ →
               </a>
             </div>
           ))}
+        </div>
+      </Section>
+
+      <Section alt title="ご相談・受託開発">
+        <div className="max-w-2xl space-y-md text-base text-ink-muted">
+          <p>
+            自社サービスづくりの経験をもとに、業務システムの開発やIT活用・業務効率化のご相談もお受けしています。
+          </p>
+        </div>
+
+        <ul className="mt-lg list-disc space-y-2xs pl-lg text-sm text-ink-muted">
+          {consulting.map((item) => (
+            <li key={item}>{item}</li>
+          ))}
+        </ul>
+
+        <p className="mt-lg max-w-2xl text-base text-ink-muted">
+          要件が固まる前の段階からご相談いただけます。
+        </p>
+
+        <div className="mt-lg">
+          <Button href="/contact">お問い合わせ</Button>
         </div>
       </Section>
     </>
