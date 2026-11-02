@@ -10,7 +10,7 @@ export const metadata = getMetadata({
 
 // 会社概要テーブルの行定義。値は lib/site.ts（PLACEHOLDER 要差し替え）。
 const rows: { label: string; value: string }[] = [
-  { label: "会社名", value: company.legalName },
+  { label: "会社名", value: `${company.legalName}（${company.nameKana}）` },
   { label: "代表者", value: company.representative },
   { label: "設立", value: company.founded },
   { label: "資本金", value: company.capital },

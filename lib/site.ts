@@ -24,6 +24,9 @@ export const site = {
 // 会社概要（会社概要ページ・フッターで使用）。PLACEHOLDER は要差し替え。
 export const company = {
   legalName: "株式会社Fochi",
+  // 社名の読み。会社概要に併記する（英語圏・日本語圏で読みが割れるため）。
+  // 登記・法人番号のフリガナと一致させること。
+  nameKana: "フォチ",
   representative: "代表取締役　＿＿＿＿", // PLACEHOLDER
   founded: "＿＿＿＿年＿＿月", // PLACEHOLDER
   capital: "＿＿＿＿円", // PLACEHOLDER
